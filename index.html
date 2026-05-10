@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enrico Corticelli | Digital Card</title>
+    <meta
+      name="description"
+      content="Digital card personale di Enrico Corticelli con GitHub recap e mini giochi arcade canvas in JavaScript vanilla."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <section class="card hero" aria-label="Profilo personale">
+        <img id="profile-image" class="avatar" src="assets/profile.jpg" alt="Foto profilo di Enrico Corticelli" />
+        <h1 id="full-name"></h1>
+        <p id="role" class="role"></p>
+        <p id="short-description" class="description"></p>
+        <div class="links" aria-label="Link social e contatto">
+          <a id="github-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a id="linkedin-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a id="email-link">Email</a>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="github-recap-title">
+        <h2 id="github-recap-title">GitHub recap</h2>
+        <p id="github-status" class="muted">Caricamento dati GitHub...</p>
+        <div class="stats" id="github-stats" hidden></div>
+        <div>
+          <h3>Repository aggiornati di recente</h3>
+          <div id="repos-list" class="repos"></div>
+        </div>
+        <div>
+          <h3>Attività pubblica recente</h3>
+          <ul id="activity-list" class="activity"></ul>
+        </div>
+      </section>
+
+      <section class="card playground" aria-labelledby="playground-title">
+        <h2 id="playground-title">Playground</h2>
+        <p class="muted">Ad ogni refresh viene caricato un micro-gioco diverso.</p>
+        <div class="game-header">
+          <div>
+            <h3 id="game-title"></h3>
+            <p id="game-instructions" class="muted"></p>
+          </div>
+          <div class="game-actions">
+            <span class="score">Score: <strong id="game-score">0</strong></span>
+            <button id="restart-button" type="button">Restart</button>
+          </div>
+        </div>
+
+        <div class="arcade-shell">
+          <canvas id="game-canvas" width="480" height="300" aria-label="Canvas del mini gioco"></canvas>
+          <p id="game-status" class="game-status" aria-live="polite"></p>
+        </div>
+
+        <div id="touch-controls" class="touch-controls" aria-label="Controlli touch">
+          <button class="touch-btn" data-key="ArrowLeft" type="button">◀</button>
+          <button class="touch-btn" data-key="ArrowUp" type="button">▲</button>
+          <button class="touch-btn" data-key="ArrowDown" type="button">▼</button>
+          <button class="touch-btn" data-key="ArrowRight" type="button">▶</button>
+          <button class="touch-btn action" data-key="Space" type="button">●</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
