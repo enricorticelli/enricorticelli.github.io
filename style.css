@@ -1,0 +1,262 @@
+:root {
+  color-scheme: dark;
+  --bg: #0c1018;
+  --card: #121825;
+  --card-border: #222d44;
+  --text: #e8edf9;
+  --muted: #93a0bb;
+  --accent: #4ed7ff;
+  --accent-soft: rgba(78, 215, 255, 0.18);
+  --danger: #ff5f87;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #131d30 0%, var(--bg) 46%);
+  color: var(--text);
+  min-height: 100dvh;
+}
+
+.layout {
+  width: min(980px, 100% - 2rem);
+  margin: 1.5rem auto 2rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.card {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 1.1rem;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.hero {
+  text-align: center;
+}
+
+.avatar {
+  width: 94px;
+  height: 94px;
+  border-radius: 999px;
+  border: 2px solid var(--accent-soft);
+  object-fit: cover;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  margin-top: 0.65rem;
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+}
+
+h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+h3 {
+  font-size: 0.98rem;
+  margin: 0.9rem 0 0.55rem;
+}
+
+.role {
+  margin-top: 0.35rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.description {
+  margin-top: 0.65rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.links {
+  margin-top: 0.95rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.links a,
+#restart-button {
+  color: var(--text);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  padding: 0.43rem 0.82rem;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.links a:hover,
+#restart-button:hover {
+  border-color: var(--accent);
+}
+
+.muted {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.stats {
+  margin: 0.6rem 0 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.55rem;
+}
+
+.stat {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  padding: 0.62rem;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.stat-value {
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.repos {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.repo {
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 0.7rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.repo a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.repo-meta {
+  margin-top: 0.42rem;
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.activity {
+  margin: 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.35rem;
+  color: var(--muted);
+}
+
+.playground .game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.game-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.score {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.score strong {
+  color: var(--accent);
+}
+
+.arcade-shell {
+  margin-top: 0.8rem;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  background: linear-gradient(145deg, #070b14, #131a2b);
+  padding: 0.7rem;
+}
+
+#game-canvas {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 10px;
+  border: 1px solid #1e2941;
+  image-rendering: pixelated;
+  background: #050910;
+  display: block;
+}
+
+.game-status {
+  min-height: 1.3rem;
+  margin-top: 0.6rem;
+  color: var(--muted);
+}
+
+.game-status.over {
+  color: var(--danger);
+}
+
+.touch-controls {
+  margin-top: 0.85rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.45rem;
+}
+
+.touch-btn {
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  padding: 0.53rem 0.35rem;
+  font-size: 1rem;
+}
+
+.touch-btn.action {
+  border-color: #2e4a5a;
+}
+
+.touch-btn:active {
+  transform: translateY(1px);
+}
+
+@media (min-width: 820px) {
+  .layout {
+    margin-top: 2rem;
+  }
+
+  .card {
+    padding: 1.25rem;
+  }
+
+  .touch-controls {
+    max-width: 430px;
+    margin-left: auto;
+  }
+}
