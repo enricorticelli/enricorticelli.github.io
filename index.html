@@ -3,66 +3,91 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Enrico Corticelli | Digital Card</title>
+    <title>Enrico Corticelli | Portfolio Sviluppatore</title>
     <meta
       name="description"
-      content="Digital card personale di Enrico Corticelli con GitHub recap e mini giochi arcade canvas in JavaScript vanilla."
+      content="Portfolio di Enrico Corticelli, Backend e DevOps Engineer: microservizi, integrazioni e architetture scalabili con riepilogo GitHub aggiornato automaticamente."
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main class="layout">
-      <section class="card hero" aria-label="Profilo personale">
-        <img id="profile-image" class="avatar" src="assets/profile.jpg" alt="Foto profilo di Enrico Corticelli" />
-        <h1 id="full-name"></h1>
-        <p id="role" class="role"></p>
-        <p id="short-description" class="description"></p>
-        <div class="links" aria-label="Link social e contatto">
-          <a id="github-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a id="linkedin-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a id="email-link">Email</a>
+    <main>
+      <section class="hero" aria-labelledby="full-name">
+        <div class="hero-glow hero-glow-left" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-right" aria-hidden="true"></div>
+
+        <div class="hero-shell">
+          <div class="hero-content">
+            <img id="profile-image" class="hero-avatar" src="assets/profile.jpg" alt="Foto profilo di Enrico Corticelli" />
+            <h1 id="full-name"></h1>
+            <p id="role" class="hero-role"></p>
+            <p id="short-description" class="hero-description"></p>
+            <nav class="social-row" aria-label="Link social e contatto">
+              <a id="github-link" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Profilo GitHub">
+                <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M12 2C6.48 2 2 6.58 2 12.22c0 4.5 2.87 8.31 6.84 9.66.5.09.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.54 1.05 1.54 1.05.9 1.57 2.35 1.12 2.92.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.08 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.32 9.32 0 0 1 12 6.63c.85 0 1.71.12 2.51.36 1.9-1.33 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.95-2.34 4.81-4.57 5.07.36.32.68.96.68 1.93 0 1.39-.01 2.52-.01 2.86 0 .27.18.59.69.49A10.23 10.23 0 0 0 22 12.22C22 6.58 17.52 2 12 2z"></path>
+                </svg>
+                <span>GitHub</span>
+              </a>
+              <a id="linkedin-link" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Profilo LinkedIn">
+                <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M19 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.06 18H5.53V9.85h2.53V18zM6.8 8.74c-.81 0-1.46-.67-1.46-1.5s.65-1.5 1.46-1.5 1.46.67 1.46 1.5-.65 1.5-1.46 1.5zM18.47 18h-2.52v-3.96c0-.94-.02-2.15-1.27-2.15-1.27 0-1.47 1.02-1.47 2.08V18h-2.52V9.85h2.42v1.11h.03c.34-.66 1.17-1.35 2.4-1.35 2.57 0 3.05 1.74 3.05 4V18z"></path>
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+              <a id="instagram-link" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Profilo Instagram">
+                <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5zm8.95 1.38a1.17 1.17 0 1 1 0 2.34 1.17 1.17 0 0 1 0-2.34zM12 7.1A4.9 4.9 0 1 1 7.1 12 4.9 4.9 0 0 1 12 7.1zm0 1.8A3.1 3.1 0 1 0 15.1 12 3.1 3.1 0 0 0 12 8.9z"></path>
+                </svg>
+                <span>Instagram</span>
+              </a>
+            </nav>
+
+            <div class="hero-metrics" aria-label="Metriche portfolio">
+              <article class="metric">
+                <span id="metric-repos" class="metric-value">--</span>
+                <span class="metric-label">Repository pubblici</span>
+              </article>
+              <article class="metric">
+                <span id="metric-followers" class="metric-value">--</span>
+                <span class="metric-label">Follower</span>
+              </article>
+              <article class="metric">
+                <span id="metric-following" class="metric-value">--</span>
+                <span class="metric-label">Seguiti</span>
+              </article>
+              <article class="metric">
+                <span id="metric-gists" class="metric-value">--</span>
+                <span class="metric-label">Gist pubblici</span>
+              </article>
+            </div>
+
+            <article class="wheel-card" aria-label="Gioco ruota">
+              <div class="wheel-stage">
+                <canvas id="wheel-canvas" width="420" height="420" aria-label="Ruota interattiva"></canvas>
+                <div id="wheel-countdown" class="wheel-countdown" aria-hidden="true"></div>
+              </div>
+              <span class="sr-only" aria-live="polite" id="wheel-live"></span>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section class="card" aria-labelledby="github-recap-title">
-        <h2 id="github-recap-title">GitHub recap</h2>
-        <p id="github-status" class="muted">Caricamento dati GitHub...</p>
-        <div class="stats" id="github-stats" hidden></div>
-        <div>
-          <h3>Repository aggiornati di recente</h3>
-          <div id="repos-list" class="repos"></div>
-        </div>
-        <div>
-          <h3>Attività pubblica recente</h3>
-          <ul id="activity-list" class="activity"></ul>
-        </div>
-      </section>
+      <section id="github-recap" class="recap" aria-labelledby="github-recap-title">
+        <div class="recap-shell">
+          <h2 id="github-recap-title">Riepilogo GitHub</h2>
+          <p id="github-status" class="muted">Caricamento dati GitHub...</p>
+          <div class="stats" id="github-stats" hidden></div>
 
-      <section class="card playground" aria-labelledby="playground-title">
-        <h2 id="playground-title">Playground</h2>
-        <p class="muted">Ad ogni refresh viene caricato un micro-gioco diverso.</p>
-        <div class="game-header">
           <div>
-            <h3 id="game-title"></h3>
-            <p id="game-instructions" class="muted"></p>
+            <h3>Repository aggiornati di recente</h3>
+            <div id="repos-list" class="repos"></div>
           </div>
-          <div class="game-actions">
-            <span class="score">Score: <strong id="game-score">0</strong></span>
-            <button id="restart-button" type="button">Restart</button>
+
+          <div>
+            <h3>Attività pubblica recente</h3>
+            <ul id="activity-list" class="activity"></ul>
           </div>
-        </div>
-
-        <div class="arcade-shell">
-          <canvas id="game-canvas" width="480" height="300" aria-label="Canvas del mini gioco"></canvas>
-          <p id="game-status" class="game-status" aria-live="polite"></p>
-        </div>
-
-        <div id="touch-controls" class="touch-controls" aria-label="Controlli touch">
-          <button class="touch-btn" data-key="ArrowLeft" type="button">◀</button>
-          <button class="touch-btn" data-key="ArrowUp" type="button">▲</button>
-          <button class="touch-btn" data-key="ArrowDown" type="button">▼</button>
-          <button class="touch-btn" data-key="ArrowRight" type="button">▶</button>
-          <button class="touch-btn action" data-key="Space" type="button">●</button>
         </div>
       </section>
     </main>
