@@ -45,34 +45,66 @@ const utils = {
 };
 
 function bootstrapProfile() {
-  ui.profileImage.src = PROFILE_IMAGE_PATH;
-  ui.fullName.textContent = FULL_NAME;
-  ui.role.textContent = ROLE;
-  ui.shortDescription.textContent = SHORT_DESCRIPTION;
-  ui.githubLink.href = `https://github.com/${GITHUB_USERNAME}`;
-  ui.linkedinLink.href = LINKEDIN_URL;
-  ui.instagramLink.href = INSTAGRAM_URL;
+  if (ui.profileImage) {
+    ui.profileImage.src = PROFILE_IMAGE_PATH;
+  }
+  if (ui.fullName) {
+    ui.fullName.textContent = FULL_NAME;
+  }
+  if (ui.role) {
+    ui.role.textContent = ROLE;
+  }
+  if (ui.shortDescription) {
+    ui.shortDescription.textContent = SHORT_DESCRIPTION;
+  }
+  if (ui.githubLink) {
+    ui.githubLink.href = `https://github.com/${GITHUB_USERNAME}`;
+  }
+  if (ui.linkedinLink) {
+    ui.linkedinLink.href = LINKEDIN_URL;
+  }
+  if (ui.instagramLink) {
+    ui.instagramLink.href = INSTAGRAM_URL;
+  }
 }
 
 function renderHeroMetrics(profile) {
   if (!profile) return;
-  ui.metricRepos.textContent = String(profile.public_repos ?? 0);
-  ui.metricFollowers.textContent = String(profile.followers ?? 0);
-  ui.metricFollowing.textContent = String(profile.following ?? 0);
-  ui.metricGists.textContent = String(profile.public_gists ?? 0);
+  if (ui.metricRepos) {
+    ui.metricRepos.textContent = String(profile.public_repos ?? 0);
+  }
+  if (ui.metricFollowers) {
+    ui.metricFollowers.textContent = String(profile.followers ?? 0);
+  }
+  if (ui.metricFollowing) {
+    ui.metricFollowing.textContent = String(profile.following ?? 0);
+  }
+  if (ui.metricGists) {
+    ui.metricGists.textContent = String(profile.public_gists ?? 0);
+  }
 }
 
 function resetHeroMetrics() {
-  ui.metricRepos.textContent = "--";
-  ui.metricFollowers.textContent = "--";
-  ui.metricFollowing.textContent = "--";
-  ui.metricGists.textContent = "--";
+  if (ui.metricRepos) {
+    ui.metricRepos.textContent = "--";
+  }
+  if (ui.metricFollowers) {
+    ui.metricFollowers.textContent = "--";
+  }
+  if (ui.metricFollowing) {
+    ui.metricFollowing.textContent = "--";
+  }
+  if (ui.metricGists) {
+    ui.metricGists.textContent = "--";
+  }
 }
 
 async function loadGitHubRecap() {
   if (!GITHUB_USERNAME || GITHUB_USERNAME.includes("INSERISCI")) {
-    ui.githubStatus.textContent =
-      "Inserisci il tuo username GitHub in app.js per mostrare il recap automatico.";
+    if (ui.githubStatus) {
+      ui.githubStatus.textContent =
+        "Inserisci il tuo username GitHub in app.js per mostrare il recap automatico.";
+    }
     resetHeroMetrics();
     return;
   }
@@ -100,19 +132,31 @@ async function loadGitHubRecap() {
     renderGitHubStats(profile, repos);
     renderRepos(repos);
     renderEvents(events);
-    ui.githubStatus.textContent = "Dati GitHub aggiornati.";
+    if (ui.githubStatus) {
+      ui.githubStatus.textContent = "Dati GitHub aggiornati.";
+    }
   } catch (error) {
     console.error(error);
-    ui.githubStatus.textContent =
-      "GitHub recap non disponibile al momento. Il resto del sito funziona normalmente.";
+    if (ui.githubStatus) {
+      ui.githubStatus.textContent =
+        "GitHub recap non disponibile al momento. Il resto del sito funziona normalmente.";
+    }
     resetHeroMetrics();
-    ui.githubStats.hidden = true;
-    ui.reposList.innerHTML = "";
-    ui.activityList.innerHTML = "";
+    if (ui.githubStats) {
+      ui.githubStats.hidden = true;
+    }
+    if (ui.reposList) {
+      ui.reposList.innerHTML = "";
+    }
+    if (ui.activityList) {
+      ui.activityList.innerHTML = "";
+    }
   }
 }
 
 function renderGitHubStats(profile, repos) {
+  if (!ui.githubStats) return;
+
   const stars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
   const forks = repos.reduce((sum, repo) => sum + (repo.forks_count || 0), 0);
   const languageCounts = repos.reduce((acc, repo) => {
@@ -144,6 +188,8 @@ function renderGitHubStats(profile, repos) {
 }
 
 function renderRepos(repos) {
+  if (!ui.reposList) return;
+
   if (!repos.length) {
     ui.reposList.innerHTML = '<p class="muted">Nessun repository pubblico trovato.</p>';
     return;
@@ -167,6 +213,8 @@ function renderRepos(repos) {
 }
 
 function renderEvents(events) {
+  if (!ui.activityList) return;
+
   if (!events.length) {
     ui.activityList.innerHTML = "<li>Nessuna attività pubblica recente.</li>";
     return;
