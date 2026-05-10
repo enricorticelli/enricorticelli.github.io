@@ -3,8 +3,8 @@ const ROLE = "Backend & DevOps Engineer";
 const SHORT_DESCRIPTION =
   "Backend & DevOps Engineer con esperienza nello sviluppo di applicazioni scalabili e ad alte prestazioni. Mi occupo soprattutto di backend, microservizi, integrazioni, architetture web e soluzioni software solide, pulite e manutenibili.";
 const LINKEDIN_URL = "https://www.linkedin.com/in/enrico-corticelli/";
-const GITHUB_USERNAME = "INSERISCI_USERNAME_GITHUB";
-const EMAIL = "INSERISCI_EMAIL";
+const GITHUB_USERNAME = "enricorticelli";
+const EMAIL = "enrico.corticelli@gmail.com";
 const PROFILE_IMAGE_PATH = "assets/profile.jpg";
 
 const REPOS_TO_SHOW = 6;
