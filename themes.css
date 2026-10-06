@@ -1,0 +1,1229 @@
+@font-face {
+  font-family: "MS Sans Serif";
+  src: url("assets/fonts/ms-sans-serif.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "MS Sans Serif";
+  src: url("assets/fonts/ms-sans-serif-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+body {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: light-dark(#e4e0d8, #1f2429);
+}
+#enrico-desktop98 {
+  width: min(100%, max(280px, calc((100svh - 180px) * 1.333333)), 1050px);
+}
+#enrico-desktop98[data-version="7"] {
+  width: min(100%, max(280px, calc((100svh - 150px) * 1.777778)), 1120px);
+}
+#enrico-desktop98 .computer-hardware {
+  width: 100%;
+}
+#enrico-desktop98 .monitor-case {
+  padding: 30px 34px 0;
+  background: linear-gradient(125deg, #ddd7c7, #bcb6a5);
+  border: 2px solid #aaa493;
+  border-radius: 36px 36px 24px 24px;
+  box-shadow:
+    inset 4px 4px 0 #f0ebde,
+    inset -5px -5px 0 #aaa38f,
+    0 20px 32px #0003;
+}
+#enrico-desktop98 .screen-glass {
+  aspect-ratio: 4 / 3;
+  position: relative;
+  border: 0;
+  border-radius: 20px / 15px;
+  background: #101512;
+  box-shadow:
+    0 0 0 9px #56574b,
+    inset 0 0 18px #000;
+  overflow: hidden;
+}
+#enrico-desktop98 .screen-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 13px #0008;
+  border-radius: inherit;
+  z-index: 200000;
+}
+#enrico-desktop98 .bezel-bottom {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #625f51;
+  font:
+    10px "Courier New",
+    monospace;
+  letter-spacing: 0.7px;
+}
+#enrico-desktop98 .monitor-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#enrico-desktop98 .monitor-controls i {
+  width: 13px;
+  height: 7px;
+  border-radius: 2px;
+  background: #b2ac99;
+  box-shadow:
+    inset 1px 1px #777360,
+    1px 1px #eee8d8;
+}
+#enrico-desktop98 .monitor-controls b {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #8baf53;
+  box-shadow: 0 0 5px #93bd5f;
+}
+#enrico-desktop98 .monitor-neck {
+  width: 30%;
+  height: 32px;
+  background: linear-gradient(90deg, #aca595, #d5cebe 55%, #a8a18d);
+  margin: 0 auto;
+}
+#enrico-desktop98 .monitor-foot {
+  width: 58%;
+  height: 20px;
+  margin: 0 auto;
+  background: linear-gradient(#d4cdbc, #b0a996);
+  border: 1px solid #aaa28f;
+  border-radius: 50% 50% 10% 10%;
+  box-shadow: 0 8px 10px #0002;
+}
+#enrico-desktop98[data-version="xp"] .monitor-case {
+  padding: 20px 22px 0;
+  background: linear-gradient(130deg, #d4d6d9, #9ea2a6);
+  border-color: #8f959b;
+  border-radius: 13px;
+  box-shadow:
+    inset 2px 2px #eef0f2,
+    inset -2px -2px #858c91,
+    0 14px 22px #0003;
+}
+#enrico-desktop98[data-version="xp"] .screen-glass {
+  border: 0;
+  box-shadow: 0 0 0 4px #414b54;
+  border-radius: 2px;
+}
+#enrico-desktop98[data-version="xp"] .bezel-bottom {
+  height: 36px;
+  color: #4b535c;
+}
+#enrico-desktop98[data-version="xp"] .monitor-neck {
+  height: 34px;
+  width: 18%;
+  background: linear-gradient(90deg, #7b8288, #bbbfc4, #7b8288);
+}
+#enrico-desktop98[data-version="xp"] .monitor-foot {
+  width: 43%;
+  height: 16px;
+  background: linear-gradient(#b9bec4, #7c838a);
+  border-color: #777e86;
+}
+#enrico-desktop98[data-version="7"] .monitor-case {
+  padding: 15px 16px 0;
+  background: linear-gradient(115deg, #30363c, #11161b 65%, #32383f);
+  border: 2px solid #10151a;
+  border-radius: 10px;
+  box-shadow:
+    inset 1px 1px #697179,
+    0 18px 26px #0004;
+}
+#enrico-desktop98[data-version="7"] .screen-glass {
+  aspect-ratio: 16 / 9;
+  border: 0;
+  box-shadow: 0 0 0 2px #080d13;
+  border-radius: 2px;
+}
+#enrico-desktop98[data-version="7"] .bezel-bottom {
+  height: 32px;
+  color: #a2acb7;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 9px;
+}
+#enrico-desktop98[data-version="7"] .monitor-controls i {
+  background: #29323c;
+  box-shadow: inset 1px 1px #111;
+}
+#enrico-desktop98[data-version="7"] .monitor-controls b {
+  background: #72b9df;
+  box-shadow: 0 0 5px #65aadd;
+  width: 5px;
+  height: 5px;
+}
+#enrico-desktop98[data-version="7"] .monitor-neck {
+  width: 13%;
+  height: 39px;
+  background: linear-gradient(90deg, #161d24, #4a545d, #161d24);
+}
+#enrico-desktop98[data-version="7"] .monitor-foot {
+  width: 45%;
+  height: 15px;
+  background: linear-gradient(#313c46, #11171d);
+  border-color: #0d1319;
+}
+#enrico-desktop98 .os {
+  --chrome: #c0c0c0;
+  --edge: #fff;
+  --shadow: #808080;
+  color-scheme: light;
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  border: 0;
+  background: #008080;
+  font-family: "MS Sans Serif", Tahoma, sans-serif;
+}
+#enrico-desktop98 .os-window {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+#enrico-desktop98 .titlebar,
+#enrico-desktop98 .addressbar,
+#enrico-desktop98 .window-statusbar {
+  flex-shrink: 0;
+}
+#enrico-desktop98 .window-body {
+  min-height: 0;
+  overflow: auto;
+  max-height: calc(var(--workspace-height, 450px) - 102px);
+  flex: 1;
+}
+#enrico-desktop98 .identity-photo {
+  float: right;
+  width: 68px;
+  height: 82px;
+  object-fit: cover;
+  object-position: center top;
+  margin: 0 0 10px 10px;
+  border: 3px solid #c0c0c0;
+  box-shadow: 1px 1px #808080;
+}
+#enrico-desktop98 .os-window.is-active .titlebar {
+  background: #000080;
+}
+#enrico-desktop98[data-version="98"] .os-window.is-active .titlebar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+}
+#enrico-desktop98 .windows-flag {
+  display: inline-grid;
+  grid-template-columns: repeat(2, 7px);
+  grid-template-rows: repeat(2, 7px);
+  gap: 1px;
+  transform: skewY(-9deg);
+  vertical-align: middle;
+  margin-right: 5px;
+}
+#enrico-desktop98 .windows-flag i:nth-child(1) {
+  background: #ec4424;
+}
+#enrico-desktop98 .windows-flag i:nth-child(2) {
+  background: #69ab23;
+}
+#enrico-desktop98 .windows-flag i:nth-child(3) {
+  background: #2695d6;
+}
+#enrico-desktop98 .windows-flag i:nth-child(4) {
+  background: #f5cf2f;
+}
+#enrico-desktop98 .taskbar {
+  background: #c0c0c0;
+}
+#enrico-desktop98 .taskbar button {
+  font-family: "MS Sans Serif", Tahoma, sans-serif;
+}
+#enrico-desktop98 .start-menu {
+  padding: 3px;
+  bottom: 39px;
+  gap: 0;
+  max-height: calc(var(--workspace-height, 450px) - 3px);
+  color-scheme: light;
+  font-family: "MS Sans Serif", Tahoma, sans-serif;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff #000 #000 #fff;
+  box-shadow: 1px 1px #808080;
+  overflow: hidden;
+  z-index: 100001;
+}
+#enrico-desktop98 .classic-menu {
+  width: min(246px, 100%);
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+}
+#enrico-desktop98 .start-rail {
+  background: #808080;
+  position: relative;
+  color: #c0c0c0;
+  overflow: hidden;
+}
+#enrico-desktop98 .rail-wordmark {
+  position: absolute;
+  bottom: 9px;
+  left: 1px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font:
+    22px/1 Arial,
+    sans-serif;
+  white-space: nowrap;
+}
+#enrico-desktop98 .rail-wordmark strong {
+  font-weight: 700;
+}
+#enrico-desktop98[data-version="98"] .start-rail {
+  background: linear-gradient(#000080, #1084d0);
+  color: #fff;
+}
+#enrico-desktop98 .menu-list {
+  min-height: 0;
+  overflow-y: auto;
+}
+#enrico-desktop98 :is(.start-menu, .submenu-popup) .start-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border: 0;
+  background: transparent;
+  width: 100%;
+  min-height: 31px;
+  padding: 4px 6px;
+  text-align: left;
+  color: #000;
+  font:
+    11px/1.2 "MS Sans Serif",
+    Tahoma,
+    sans-serif;
+}
+#enrico-desktop98 :is(.start-menu, .submenu-popup) .start-item:hover,
+#enrico-desktop98 :is(.start-menu, .submenu-popup) .start-item:focus-visible,
+#enrico-desktop98
+  :is(.start-menu, .submenu-popup)
+  .start-item[aria-expanded="true"] {
+  background: #000080;
+  color: #fff;
+}
+#enrico-desktop98 .menu-label {
+  flex: 1;
+}
+#enrico-desktop98 .menu-arrow {
+  font:
+    8px Arial,
+    sans-serif;
+}
+#enrico-desktop98 .menu-separator {
+  margin: 4px 3px;
+  border: 0;
+  border-top: 1px solid #808080;
+  border-bottom: 1px solid #fff;
+}
+#enrico-desktop98 .submenu-popup {
+  position: absolute;
+  width: min(220px, 100%);
+  max-height: calc(var(--workspace-height, 450px) - 3px);
+  overflow-y: auto;
+  padding: 3px;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff #000 #000 #fff;
+  box-shadow: 1px 1px #808080;
+}
+#enrico-desktop98 .submenu-popup .start-item {
+  min-height: 25px;
+}
+#enrico-desktop98 .menu-icon {
+  position: relative;
+  flex: 0 0 24px;
+  height: 23px;
+  image-rendering: pixelated;
+}
+#enrico-desktop98 .menu-icon::before,
+#enrico-desktop98 .menu-icon::after {
+  content: "";
+  position: absolute;
+}
+#enrico-desktop98 :is(.icon-folder, .icon-programs, .icon-favorites)::before {
+  width: 20px;
+  height: 14px;
+  left: 2px;
+  top: 7px;
+  background: #ffdc67;
+  border: 1px solid #806d28;
+  box-shadow: inset 1px 1px #fff7b1;
+}
+#enrico-desktop98 :is(.icon-folder, .icon-programs, .icon-favorites)::after {
+  left: 2px;
+  top: 3px;
+  width: 10px;
+  height: 5px;
+  border: 1px solid #806d28;
+  border-bottom: 0;
+  background: #efd27a;
+}
+#enrico-desktop98 .icon-programs::after {
+  width: 14px;
+  height: 12px;
+  top: 0;
+  left: 7px;
+  border: 1px solid #1f3976;
+  background: linear-gradient(#163882 4px, #eee 4px);
+}
+#enrico-desktop98 .icon-favorites::after {
+  content: "★";
+  color: #e6a50b;
+  background: transparent;
+  border: 0;
+  font: 20px/1 Arial;
+  text-shadow: 1px 1px #805b15;
+  left: 8px;
+  top: 3px;
+}
+#enrico-desktop98 .icon-document::before {
+  width: 16px;
+  height: 21px;
+  left: 4px;
+  top: 0;
+  background: repeating-linear-gradient(#fff 0 4px, #c3c3c3 4px 5px);
+  border: 1px solid #777;
+  box-shadow: 2px 1px #aaa;
+}
+#enrico-desktop98 :is(.icon-internet, .icon-update)::before {
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  border: 1px solid #173d8d;
+  background:
+    radial-gradient(ellipse at 25% 20%, #74ce8b 0 19%, transparent 20%),
+    radial-gradient(ellipse at 70% 64%, #a4c976 0 22%, transparent 23%), #3986cf;
+}
+#enrico-desktop98 .icon-update::after {
+  content: "↻";
+  font: 23px/1 Arial;
+  color: #e4c640;
+  text-shadow: 1px 1px #84742b;
+  left: 4px;
+  top: 1px;
+}
+#enrico-desktop98 .icon-search::before {
+  width: 13px;
+  height: 13px;
+  border: 3px solid #64646f;
+  border-radius: 50%;
+  background: #bbdbe1;
+}
+#enrico-desktop98 .icon-search::after {
+  height: 12px;
+  width: 4px;
+  background: #555;
+  transform: rotate(-40deg);
+  left: 17px;
+  top: 11px;
+}
+#enrico-desktop98 :is(.icon-settings, .icon-computer)::before {
+  left: 2px;
+  top: 1px;
+  width: 21px;
+  height: 15px;
+  background: linear-gradient(#174299, #91bad6);
+  border: 3px ridge #d2d2d2;
+}
+#enrico-desktop98 :is(.icon-settings, .icon-computer)::after {
+  left: 5px;
+  top: 18px;
+  width: 16px;
+  height: 4px;
+  background: #b7b7b7;
+  border: 1px solid #555;
+}
+#enrico-desktop98 .icon-help::before {
+  content: "?";
+  font:
+    bold 21px/1 Arial,
+    sans-serif;
+  color: #164ac0;
+  text-shadow: 1px 1px #eee;
+  left: 5px;
+}
+#enrico-desktop98 .icon-run::before {
+  width: 20px;
+  height: 13px;
+  left: 1px;
+  top: 4px;
+  background: linear-gradient(#000080 4px, #eee 4px);
+  border: 1px solid #777;
+}
+#enrico-desktop98 .icon-run::after {
+  content: "▶";
+  color: #638921;
+  font: 13px Arial;
+  left: 13px;
+  top: 9px;
+  text-shadow: 1px 1px #25400a;
+}
+#enrico-desktop98 .icon-power::before {
+  width: 17px;
+  height: 17px;
+  left: 3px;
+  top: 2px;
+  border: 3px solid #8b3833;
+  border-radius: 50%;
+  background: #c46352;
+}
+#enrico-desktop98 .icon-power::after {
+  width: 3px;
+  height: 10px;
+  left: 10px;
+  top: 0;
+  background: #ffe5c8;
+  box-shadow: 1px 0 #9a433c;
+}
+#enrico-desktop98 .icon-user::before {
+  left: 8px;
+  top: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #e4b87b;
+  border: 1px solid #947047;
+}
+#enrico-desktop98 .icon-user::after {
+  left: 4px;
+  top: 10px;
+  width: 17px;
+  height: 11px;
+  border-radius: 7px 7px 0 0;
+  background: #2b6a91;
+  border: 1px solid #194563;
+}
+#enrico-desktop98 .icon-mail::before {
+  width: 22px;
+  height: 15px;
+  top: 3px;
+  background: linear-gradient(140deg, #ddd 49%, #aaa 50%, #fff 52%);
+  border: 1px solid #777;
+}
+#enrico-desktop98 .icon-picture::before {
+  width: 21px;
+  height: 18px;
+  left: 1px;
+  top: 1px;
+  background: linear-gradient(135deg, #89cdeb 50%, #6d9949 51%);
+  border: 2px solid #faf0cf;
+  box-shadow: 1px 1px #888;
+}
+#enrico-desktop98 .icon-media::before {
+  width: 22px;
+  height: 21px;
+  border: 1px solid #345b85;
+  border-radius: 50%;
+  background: linear-gradient(#63a4d4, #17487a);
+}
+#enrico-desktop98 .icon-media::after {
+  content: "▶";
+  font: 15px Arial;
+  color: #ffc853;
+  left: 6px;
+  top: 2px;
+}
+#enrico-desktop98 .icon-mine::before {
+  width: 13px;
+  height: 13px;
+  left: 5px;
+  top: 4px;
+  background: #333;
+  border-radius: 50%;
+  box-shadow:
+    -4px 0 #555,
+    4px 0 #555,
+    0 -4px #555,
+    0 4px #555;
+}
+#enrico-desktop98 .icon-mine::after {
+  width: 3px;
+  height: 3px;
+  top: 6px;
+  left: 8px;
+  background: #fff;
+}
+#enrico-desktop98[data-version="xp"] .os {
+  --chrome: #ece9d8;
+  --edge: #fff;
+  --shadow: #8e8c7b;
+  font-family: Tahoma, Arial, sans-serif;
+  background:
+    radial-gradient(ellipse at 14% 130%, #629d20 0 43%, transparent 44%),
+    radial-gradient(ellipse at 87% 137%, #75aa38 0 43%, transparent 44%),
+    linear-gradient(#369de1, #a8d6f1);
+}
+#enrico-desktop98[data-version="xp"] .os-window {
+  padding: 3px;
+  border: 2px solid #165bd3;
+  border-radius: 8px 8px 0 0;
+  background: #ece9d8;
+  box-shadow: 2px 3px 8px #0006;
+}
+#enrico-desktop98[data-version="xp"] .titlebar {
+  background: linear-gradient(#7699d0, #5279b7);
+  border-radius: 4px 4px 0 0;
+}
+#enrico-desktop98[data-version="xp"] .os-window.is-active .titlebar {
+  background: linear-gradient(
+    #4596ff 0,
+    #1b62db 14%,
+    #0054e3 55%,
+    #176beb 90%,
+    #0051c7 100%
+  );
+}
+#enrico-desktop98[data-version="xp"] .window-handle {
+  color: #fff;
+  text-shadow: 1px 1px #164d99;
+  font-family: Tahoma, Arial, sans-serif;
+  font-weight: 700;
+}
+#enrico-desktop98[data-version="xp"] .window-actions button {
+  border: 1px solid #fff;
+  border-radius: 3px;
+  color: #fff;
+  background: linear-gradient(#8ab8f9, #3264ca);
+}
+#enrico-desktop98[data-version="xp"] .window-actions .window-close {
+  background: linear-gradient(#f79c73, #df482c);
+}
+#enrico-desktop98[data-version="xp"] .window-body {
+  background: #fff;
+  border-color: #a1b2ca;
+}
+#enrico-desktop98[data-version="xp"] .taskbar {
+  border: 0;
+  background: linear-gradient(#4286ed 0, #245edb 12%, #245bd4 90%, #1947ba);
+}
+#enrico-desktop98[data-version="xp"] .taskbar button {
+  font-family: Tahoma, Arial, sans-serif;
+  border: 1px solid #1653c4;
+  color: #fff;
+  background: linear-gradient(#4e8bea, #3270db);
+  border-radius: 3px;
+}
+#enrico-desktop98[data-version="xp"] .taskbar .start-button {
+  align-self: stretch;
+  height: 38px;
+  margin: -4px 1px -4px -4px;
+  padding: 4px 13px;
+  border: 0;
+  border-radius: 0 13px 13px 0;
+  background: linear-gradient(#72be71 0, #3b923c 20%, #2a852c 70%, #237c24);
+  font:
+    italic 700 18px Tahoma,
+    Arial,
+    sans-serif;
+  text-shadow: 1px 1px #23631c;
+}
+#enrico-desktop98[data-version="xp"] .running-apps button.is-active {
+  background: #1953bd;
+}
+#enrico-desktop98 .modern-menu {
+  width: min(430px, 100%);
+  padding: 0;
+  border-radius: 7px 7px 0 0;
+  border: 2px solid #1c59b8;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+#enrico-desktop98 .start-user {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-shrink: 0;
+  height: 58px;
+  padding: 8px;
+  background: linear-gradient(#4693e9, #1a62c9);
+  color: #fff;
+  font:
+    700 17px Tahoma,
+    Arial,
+    sans-serif;
+  text-shadow: 1px 1px #345e94;
+}
+#enrico-desktop98 .start-user img {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border: 2px solid #fff;
+  border-radius: 3px;
+}
+#enrico-desktop98 .menu-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+}
+#enrico-desktop98 .menu-left {
+  background: #fff;
+  padding: 5px;
+}
+#enrico-desktop98 .menu-right {
+  background: #d3e5fa;
+  border-left: 1px solid #9bb9df;
+  padding: 5px;
+}
+#enrico-desktop98 .modern-menu .start-item {
+  font-family: Tahoma, Arial, sans-serif;
+  min-height: 29px;
+}
+#enrico-desktop98 .modern-menu .start-item:hover,
+#enrico-desktop98 .modern-menu .start-item:focus-visible {
+  background: #316ac5;
+}
+#enrico-desktop98 .modern-menu .menu-right .start-item {
+  font-size: 11px;
+}
+#enrico-desktop98 .start-footer {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 7px;
+  background: linear-gradient(#3d89df, #1d64c8);
+}
+#enrico-desktop98 .start-footer .start-item {
+  width: auto;
+  color: #fff;
+  font-family: Tahoma, Arial, sans-serif;
+  min-height: 28px;
+  font-size: 10px;
+}
+#enrico-desktop98 .start-footer .menu-icon {
+  flex-basis: 22px;
+  transform: scale(0.8);
+}
+#enrico-desktop98[data-version="7"] .os {
+  --chrome: #e5edf4;
+  --edge: #fff;
+  --shadow: #8899a6;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: radial-gradient(
+    ellipse at 64% 92%,
+    #73d1ef 0,
+    #007ac0 24%,
+    #06478c 55%,
+    #103066 85%
+  );
+}
+#enrico-desktop98[data-version="7"] .os-window {
+  border: 1px solid #477589;
+  border-radius: 6px;
+  padding: 4px;
+  background: linear-gradient(110deg, #c7e3eecc, #87b0c2cc);
+  box-shadow:
+    inset 0 0 0 1px #ffffff77,
+    0 6px 13px #0005;
+}
+#enrico-desktop98[data-version="7"] .titlebar,
+#enrico-desktop98[data-version="7"] .os-window.is-active .titlebar {
+  background: transparent;
+  color: #183c51;
+}
+#enrico-desktop98[data-version="7"] .window-handle {
+  color: #183c51;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  text-shadow: 0 0 5px #fff;
+}
+#enrico-desktop98[data-version="7"] .window-actions button {
+  border: 1px solid #7195a4;
+  border-radius: 3px;
+  color: #173c54;
+  background: linear-gradient(#e6f1f688, #b5d1dfcc);
+}
+#enrico-desktop98[data-version="7"] .window-actions .window-close {
+  background: linear-gradient(#eca68b, #b3422b);
+  color: #fff;
+}
+#enrico-desktop98[data-version="7"] .window-body {
+  background: #fff;
+  border: 1px solid #8dabbc;
+}
+#enrico-desktop98[data-version="7"] .taskbar {
+  border-top: 1px solid #afd6e288;
+  background: linear-gradient(#3b6c8699, #183c56bb);
+}
+#enrico-desktop98[data-version="7"] .taskbar button {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  border: 1px solid #94b7c377;
+  color: #fff;
+  border-radius: 3px;
+  background: linear-gradient(#96c3d044, #436d8733);
+}
+#enrico-desktop98[data-version="7"] .taskbar .start-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  padding: 0;
+  flex-shrink: 0;
+  border: 1px solid #adcfdf;
+  background: radial-gradient(
+    ellipse at 50% 20%,
+    #5fa9d3,
+    #064a6d 65%,
+    #042a42
+  );
+  box-shadow: 0 0 3px #fff8;
+}
+#enrico-desktop98[data-version="7"] .start-text {
+  display: none;
+}
+#enrico-desktop98[data-version="7"] .start-button .windows-flag {
+  margin: 0;
+}
+#enrico-desktop98[data-version="7"] .modern-menu {
+  border: 1px solid #455f70;
+  border-radius: 7px;
+  padding: 6px;
+  background: linear-gradient(100deg, #86a8bacf, #274b62e8);
+  box-shadow:
+    0 0 0 1px #cbd9e277,
+    0 3px 9px #0005;
+}
+#enrico-desktop98[data-version="7"] .start-user {
+  background: transparent;
+  height: 43px;
+  justify-content: flex-end;
+  font:
+    13px "Segoe UI",
+    Tahoma,
+    sans-serif;
+  padding: 0 8px 5px;
+}
+#enrico-desktop98[data-version="7"] .start-user img {
+  width: 35px;
+  height: 35px;
+}
+#enrico-desktop98[data-version="7"] .menu-left {
+  border-radius: 4px;
+}
+#enrico-desktop98[data-version="7"] .menu-right {
+  background: transparent;
+  border: 0;
+}
+#enrico-desktop98[data-version="7"] .menu-right .start-item {
+  color: #fff;
+}
+#enrico-desktop98[data-version="7"] .start-item {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+#enrico-desktop98[data-version="7"] .start-item:hover,
+#enrico-desktop98[data-version="7"] .start-item:focus-visible {
+  color: #142e3e;
+  background: linear-gradient(#dceef9, #aed5ed);
+  border-radius: 3px;
+}
+#enrico-desktop98[data-version="7"] .start-footer {
+  background: transparent;
+  padding: 6px 0 0;
+}
+#enrico-desktop98 .start-search {
+  min-width: 0;
+  flex: 1;
+}
+#enrico-desktop98 .start-search input {
+  width: 100%;
+  padding: 5px;
+  font:
+    11px "Segoe UI",
+    Tahoma,
+    sans-serif;
+  border: 1px solid #7590a1;
+  height: 29px;
+}
+#enrico-desktop98[data-version="7"] .start-footer .start-item {
+  background: linear-gradient(#bbd0dc, #9fb9c9);
+  border: 1px solid #658295;
+  color: #253847;
+  border-radius: 3px;
+  font:
+    10px "Segoe UI",
+    Tahoma,
+    sans-serif;
+  padding: 5px 7px;
+}
+#enrico-desktop98[data-version="7"] .start-footer .menu-icon {
+  display: none;
+}
+#enrico-desktop98 .startup {
+  z-index: 100010;
+  padding: 8%;
+  font-size: clamp(10px, 1.4vw, 13px);
+}
+#enrico-desktop98 .bios-brand {
+  font-size: clamp(18px, 3vw, 28px);
+}
+#enrico-desktop98[data-version="95"] .startup,
+#enrico-desktop98[data-version="98"] .startup {
+  background: linear-gradient(130deg, #1e3989, #61a4ca);
+  color: #fff;
+}
+#enrico-desktop98[data-version="xp"] .startup,
+#enrico-desktop98[data-version="7"] .startup {
+  background: #0b1014;
+  color: #d3ddd9;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+#enrico-desktop98 .error-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 100006;
+  pointer-events: none;
+}
+#enrico-desktop98 .crash-error {
+  pointer-events: auto;
+  padding: 4px;
+  max-height: 100%;
+  background: var(--chrome);
+  box-shadow: 3px 3px #0005;
+}
+#enrico-desktop98 .crash-error .titlebar {
+  min-height: 24px;
+  padding: 4px 6px;
+  font-size: 11px;
+  background: #000080;
+  color: #fff;
+}
+#enrico-desktop98 .error-content {
+  display: flex;
+  gap: 12px;
+  padding: 14px 10px 7px;
+  align-items: flex-start;
+  font:
+    11px/1.4 Tahoma,
+    Arial,
+    sans-serif;
+}
+#enrico-desktop98 .error-content p {
+  margin: 0;
+}
+#enrico-desktop98 .error-symbol {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #c22d26;
+  color: #fff;
+  text-align: center;
+  font: 700 27px/27px Arial;
+}
+#enrico-desktop98 .error-ok,
+#enrico-desktop98 .dialog-button {
+  align-self: flex-end;
+  min-width: 65px;
+  padding: 4px 10px;
+  margin: 5px 10px 7px;
+  border: 2px solid;
+  border-color: #fff #555 #555 #fff;
+  background: var(--chrome);
+  font:
+    11px Tahoma,
+    Arial,
+    sans-serif;
+  color: #222;
+}
+#enrico-desktop98 .blue-screen {
+  z-index: 100009;
+  gap: 14px;
+  background: #0000aa;
+  font-size: clamp(10px, 1.4vw, 13px);
+  padding: 8%;
+}
+#enrico-desktop98 .blue-screen p {
+  font-size: clamp(14px, 2vw, 21px);
+  margin: 7px 0;
+}
+#enrico-desktop98 .blue-screen code {
+  font-size: 11px;
+}
+#enrico-desktop98 .run-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font:
+    12px Tahoma,
+    Arial,
+    sans-serif;
+}
+#enrico-desktop98 .run-form input {
+  width: 100%;
+  padding: 5px;
+  border: 2px inset #ddd;
+  font:
+    13px Tahoma,
+    Arial,
+    sans-serif;
+}
+#enrico-desktop98 .shutdown-form label {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  align-items: center;
+  font:
+    11px Tahoma,
+    Arial,
+    sans-serif;
+}
+#enrico-desktop98 .dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+#enrico-desktop98 .minesweeper {
+  width: 100%;
+  max-width: 272px;
+  margin: auto;
+  background: #c0c0c0;
+  color: #000;
+  padding: 5px;
+  border: 2px solid;
+  border-color: #fff #808080 #808080 #fff;
+}
+#enrico-desktop98 .mine-menubar {
+  display: flex;
+  gap: 10px;
+  padding: 0 0 5px;
+}
+#enrico-desktop98 .mine-menubar button {
+  padding: 2px 3px;
+  border: 0;
+  background: transparent;
+  color: #000;
+  font:
+    11px "MS Sans Serif",
+    Tahoma,
+    sans-serif;
+}
+#enrico-desktop98 .mine-menubar button[aria-pressed="true"] {
+  background: #808080;
+  color: #fff;
+}
+#enrico-desktop98 .mine-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px;
+  border: 2px inset #ddd;
+  margin-bottom: 6px;
+}
+#enrico-desktop98 .mine-counter {
+  color: #f22;
+  background: #180000;
+  padding: 2px 4px;
+  font:
+    23px/1 "Courier New",
+    monospace;
+}
+#enrico-desktop98 .mine-face {
+  border: 2px outset #ddd;
+  padding: 1px 4px;
+  height: 29px;
+  min-width: 30px;
+  background: #c0c0c0;
+  color: #000;
+  font:
+    700 18px/1 Arial,
+    sans-serif;
+}
+#enrico-desktop98 .mine-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  border: 3px inset #ddd;
+}
+#enrico-desktop98 .mine-cell {
+  min-width: 0;
+  aspect-ratio: 1;
+  border: 2px solid;
+  border-color: #fff #808080 #808080 #fff;
+  background: #c0c0c0;
+  padding: 0;
+  color: #000;
+  font:
+    700 15px/1 Arial,
+    sans-serif;
+}
+#enrico-desktop98 .mine-cell.revealed {
+  border: 1px solid #808080;
+}
+#enrico-desktop98 .mine-cell.mine-hit {
+  background: #f22;
+}
+#enrico-desktop98 .mine-cell[data-number="1"] {
+  color: #00f;
+}
+#enrico-desktop98 .mine-cell[data-number="2"] {
+  color: #008000;
+}
+#enrico-desktop98 .mine-cell[data-number="3"] {
+  color: #f00;
+}
+#enrico-desktop98 .mine-cell[data-number="4"] {
+  color: #000080;
+}
+#enrico-desktop98 .mine-message {
+  font:
+    10px/1.4 Tahoma,
+    Arial,
+    sans-serif;
+  padding-top: 6px;
+  min-height: 20px;
+}
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+  #enrico-desktop98 .monitor-case {
+    padding: 14px 13px 0;
+    border-radius: 19px;
+  }
+  #enrico-desktop98 .screen-glass {
+    border-width: 0;
+    box-shadow: 0 0 0 5px #56574b;
+    border-radius: 9px;
+  }
+  #enrico-desktop98 .bezel-bottom {
+    height: 32px;
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+  #enrico-desktop98 .monitor-controls {
+    gap: 5px;
+  }
+  #enrico-desktop98 .monitor-controls i {
+    width: 9px;
+  }
+  #enrico-desktop98 .monitor-controls b {
+    width: 6px;
+    height: 6px;
+  }
+  #enrico-desktop98 .monitor-neck {
+    height: 23px;
+  }
+  #enrico-desktop98 .monitor-foot {
+    height: 13px;
+  }
+  #enrico-desktop98 .bios-rule {
+    margin: 10px 0;
+  }
+  #enrico-desktop98 .bios-lines {
+    gap: 3px;
+  }
+  #enrico-desktop98 .boot-step {
+    margin-top: 3px;
+  }
+  #enrico-desktop98 .boot-meter {
+    height: 8px;
+    margin: 9px 0;
+  }
+  #enrico-desktop98 .bios-footer {
+    font-size: 9px;
+  }
+  #enrico-desktop98 .identity-photo {
+    width: 51px;
+    height: 62px;
+  }
+  #enrico-desktop98 .start-user {
+    height: 34px;
+    padding: 4px;
+    font-size: 12px;
+    gap: 5px;
+  }
+  #enrico-desktop98 .start-user img {
+    height: 25px;
+    width: 25px;
+  }
+  #enrico-desktop98 :is(.start-menu, .submenu-popup) .start-item {
+    gap: 5px;
+    min-height: 23px;
+    padding: 3px;
+    font-size: 10px;
+  }
+  #enrico-desktop98 .menu-icon {
+    transform: scale(0.7);
+    flex-basis: 17px;
+  }
+  #enrico-desktop98 .menu-left,
+  #enrico-desktop98 .menu-right {
+    padding: 2px;
+  }
+  #enrico-desktop98 .start-footer {
+    padding: 3px;
+    gap: 3px;
+  }
+  #enrico-desktop98 .start-footer .start-item {
+    font-size: 9px;
+  }
+  #enrico-desktop98 .window-body {
+    padding: 10px;
+  }
+  #enrico-desktop98 .window-body h2 {
+    font-size: 23px;
+  }
+  #enrico-desktop98 .mine-counter {
+    font-size: 18px;
+  }
+  #enrico-desktop98 .mine-cell {
+    font-size: 11px;
+  }
+  #enrico-desktop98 .blue-screen {
+    gap: 6px;
+  }
+  #enrico-desktop98 .blue-screen code {
+    font-size: 9px;
+  }
+  #enrico-desktop98 .blue-screen .reboot {
+    font-size: 10px;
+    margin-top: 5px;
+    padding: 5px;
+  }
+}
+
+#enrico-desktop98 .window-body {
+  padding: 14px;
+}
+#enrico-desktop98 .window-body h2 {
+  font-size: 26px;
+  margin: 9px 0;
+}
+#enrico-desktop98 .window-body p {
+  font-size: 11px;
+  margin-bottom: 9px;
+}
+#enrico-desktop98 .external-link {
+  font-size: 11px;
+}
+#enrico-desktop98 .profile-banner {
+  height: 30px;
+  margin: -14px -14px 9px;
+  padding: 4px 14px;
+}
+#enrico-desktop98 .instagram-art {
+  height: 56px;
+  margin-bottom: 9px;
+}
+#enrico-desktop98 .code-file {
+  font-size: 10px;
+  line-height: 1.45;
+  padding: 8px;
+  margin: 8px 0;
+}
