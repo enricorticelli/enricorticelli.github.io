@@ -10,87 +10,108 @@
     />
     <title>Enrico Corticelli | Personal Computer</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="themes.css" />
+    <script src="minesweeper.js" defer></script>
+    <script src="system-ui.js" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
     <main id="enrico-desktop98" aria-label="Desktop 98 di Enrico Corticelli">
       <h1 class="sr-only">Enrico Corticelli — Backend Developer</h1>
-      <div class="os booting">
-        <div class="workspace" inert>
-          <div class="wallpaper" aria-hidden="true">
-            <span>ec.</span
-            ><small>personal computer.<br />molto personal.</small>
+      <div class="computer-hardware">
+        <div class="monitor-case">
+          <div class="screen-glass">
+            <div class="os booting">
+              <div class="workspace" inert>
+                <div class="wallpaper" aria-hidden="true">
+                  <span>ec.</span
+                  ><small>personal computer.<br />molto personal.</small>
+                </div>
+                <nav
+                  class="desktop-icons"
+                  aria-label="Applicazioni del desktop"
+                >
+                  <button type="button" class="desktop-icon" data-open="readme">
+                    <span class="document-icon" aria-hidden="true">ec.</span
+                    ><span>Enrico.txt</span>
+                  </button>
+                  <button type="button" class="desktop-icon" data-open="gh">
+                    <span class="folder-icon" aria-hidden="true">&lt;/&gt;</span
+                    ><span>GitHub</span>
+                  </button>
+                  <button type="button" class="desktop-icon" data-open="li">
+                    <span class="network-icon" aria-hidden="true">in</span
+                    ><span>LinkedIn</span>
+                  </button>
+                  <button type="button" class="desktop-icon" data-open="ig">
+                    <span class="photo-icon" aria-hidden="true">ig</span
+                    ><span>Instagram</span>
+                  </button>
+                </nav>
+                <div class="window-layer" aria-label="Finestre aperte"></div>
+              </div>
+              <div class="start-menu" hidden></div>
+              <div class="taskbar" inert>
+                <button
+                  type="button"
+                  class="start-button"
+                  aria-expanded="false"
+                >
+                  ▦ Start
+                </button>
+                <nav
+                  class="running-apps"
+                  aria-label="Finestre nella barra delle applicazioni"
+                ></nav>
+                <span class="taskbar-brand">EC OS</span>
+              </div>
+              <div class="error-layer" aria-label="Errori di sistema"></div>
+              <div class="startup" role="status" aria-live="polite">
+                <div class="bios-brand">ec / personal system</div>
+                <div class="bios-rule"></div>
+                <div class="bios-lines">
+                  <span>ENRICO BIOS · PERSONAL EDITION</span
+                  ><span>Nome: Enrico Corticelli</span
+                  ><span>Ruolo: Backend Developer</span
+                  ><span class="boot-step">Avvio del sistema…</span>
+                </div>
+                <div
+                  class="boot-meter"
+                  role="progressbar"
+                  aria-label="Accensione del computer"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="0"
+                >
+                  <span></span>
+                </div>
+                <span class="bios-footer"
+                  >Caricamento di EnricoOS<span
+                    class="bios-cursor"
+                    aria-hidden="true"
+                    >_</span
+                  ></span
+                >
+              </div>
+              <div class="blue-screen" hidden role="status">
+                <span class="bsod-label">Windows</span>
+                <p>Si è verificato un errore irreversibile.</p>
+                <code>STOP: 0x0000000E · ENRICO.EXE</code
+                ><span class="crash-reason"></span>
+                <span class="crash-countdown"
+                  >Riavvio automatico del sistema…</span
+                ><button type="button" class="reboot">Riavvia ora ↵</button>
+              </div>
+              <span class="desktop-status" aria-live="polite"></span>
+            </div>
           </div>
-          <nav class="desktop-icons" aria-label="Applicazioni del desktop">
-            <button type="button" class="desktop-icon" data-open="readme">
-              <span class="document-icon" aria-hidden="true">ec.</span
-              ><span>Enrico.txt</span>
-            </button>
-            <button type="button" class="desktop-icon" data-open="gh">
-              <span class="folder-icon" aria-hidden="true">&lt;/&gt;</span
-              ><span>GitHub</span>
-            </button>
-            <button type="button" class="desktop-icon" data-open="li">
-              <span class="network-icon" aria-hidden="true">in</span
-              ><span>LinkedIn</span>
-            </button>
-            <button type="button" class="desktop-icon" data-open="ig">
-              <span class="photo-icon" aria-hidden="true">ig</span
-              ><span>Instagram</span>
-            </button>
-          </nav>
-          <div class="window-layer" aria-label="Finestre aperte"></div>
-        </div>
-        <div class="start-menu" hidden>
-          <span>ENRICO OS</span
-          ><button type="button" data-menu="readme">Apri Enrico.txt</button
-          ><button type="button" data-menu="restart">Riavvia il computer</button
-          ><button type="button" data-menu="crash">
-            Provoca un piccolo disastro
-          </button>
-        </div>
-        <div class="taskbar" inert>
-          <button type="button" class="start-button" aria-expanded="false">
-            ▦ Start
-          </button>
-          <nav
-            class="running-apps"
-            aria-label="Finestre nella barra delle applicazioni"
-          ></nav>
-          <span class="taskbar-brand">EC OS</span>
-        </div>
-        <div class="startup" role="status" aria-live="polite">
-          <div class="bios-brand">ec / personal system</div>
-          <div class="bios-rule"></div>
-          <div class="bios-lines">
-            <span>ENRICO BIOS · PERSONAL EDITION</span
-            ><span>Nome: Enrico Corticelli</span
-            ><span>Ruolo: Backend Developer</span
-            ><span class="boot-step">Avvio del sistema…</span>
+          <div class="bezel-bottom" aria-hidden="true">
+            <span class="monitor-model">EC Multiscan · CRT</span
+            ><span class="monitor-controls"><i></i><i></i><b></b></span>
           </div>
-          <div
-            class="boot-meter"
-            role="progressbar"
-            aria-label="Accensione del computer"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            aria-valuenow="0"
-          >
-            <span></span>
-          </div>
-          <span class="bios-footer"
-            >Caricamento di EnricoOS<span class="bios-cursor" aria-hidden="true"
-              >_</span
-            ></span
-          >
         </div>
-        <div class="blue-screen" hidden role="status">
-          <span class="bsod-label">ENRICO.EXE</span>
-          <p>Il frontend ha smesso<br />di collaborare.</p>
-          <span>Il backend sta benissimo.<br />I tuoi link sono al sicuro.</span
-          ><button type="button" class="reboot">Riavvia il buon senso ↵</button>
-        </div>
-        <span class="desktop-status" aria-live="polite"></span>
+        <div class="monitor-neck" aria-hidden="true"></div>
+        <div class="monitor-foot" aria-hidden="true"></div>
       </div>
       <template class="window-template"
         ><section class="os-window" aria-label="Finestra">
