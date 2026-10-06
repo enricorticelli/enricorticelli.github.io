@@ -1,851 +1,374 @@
-const FULL_NAME = "Enrico Corticelli";
-const ROLE = "Backend e DevOps Engineer";
-const SHORT_DESCRIPTION =
-  "Progetto applicazioni scalabili, microservizi e integrazioni affidabili. Trasformo requisiti complessi in soluzioni performanti, manutenibili e pronte per la crescita.";
-const LINKEDIN_URL = "https://www.linkedin.com/in/enrico-corticelli/";
-const GITHUB_USERNAME = "enricorticelli";
-const INSTAGRAM_URL = "https://www.instagram.com/enricorticelli/";
-const PROFILE_IMAGE_PATH = "assets/profile.jpg";
+(() => {
+  const BOOT_DURATION_MS = 3000;
+  const root = document.getElementById("enrico-desktop98");
+  const os = root.querySelector(".os");
+  const workspace = root.querySelector(".workspace");
+  const layer = root.querySelector(".window-layer");
+  const tasks = root.querySelector(".running-apps");
+  const template = root.querySelector(".window-template");
+  const start = root.querySelector(".start-button");
+  const menu = root.querySelector(".start-menu");
+  const startup = root.querySelector(".startup");
+  const bsod = root.querySelector(".blue-screen");
+  const taskbar = root.querySelector(".taskbar");
+  const status = root.querySelector(".desktop-status");
+  const bootMeter = root.querySelector(".boot-meter");
+  const bootStep = root.querySelector(".boot-step");
 
-const REPOS_TO_SHOW = 6;
+  const apps = {
+    readme: {
+      title: "enrico.txt",
+      label: "Enrico",
+      status: "Backend Developer",
+    },
+    gh: {
+      title: "github.url",
+      label: "GitHub",
+      url: "https://github.com/enricorticelli",
+      address: "github.com/enricorticelli",
+      status: "Codice e curiosità",
+    },
+    li: {
+      title: "linkedin.url",
+      label: "LinkedIn",
+      url: "https://www.linkedin.com/in/enrico-corticelli/",
+      address: "linkedin.com/in/enrico-corticelli",
+      status: "Parliamo di lavoro",
+    },
+    ig: {
+      title: "instagram.url",
+      label: "Instagram",
+      url: "https://www.instagram.com/enricorticelli/",
+      address: "instagram.com/enricorticelli",
+      status: "Anche fuori dal codice",
+    },
+  };
+  let windows = [];
+  let nextId = 1;
+  let bootInterval;
+  let bootTimeout;
+  let resizeFrame;
+  const elements = new Map();
 
-const ui = {
-  profileImage: document.getElementById("profile-image"),
-  fullName: document.getElementById("full-name"),
-  role: document.getElementById("role"),
-  shortDescription: document.getElementById("short-description"),
-  githubLink: document.getElementById("github-link"),
-  linkedinLink: document.getElementById("linkedin-link"),
-  instagramLink: document.getElementById("instagram-link"),
-  githubStatus: document.getElementById("github-status"),
-  githubStats: document.getElementById("github-stats"),
-  reposList: document.getElementById("repos-list"),
-  activityList: document.getElementById("activity-list"),
-  metricRepos: document.getElementById("metric-repos"),
-  metricFollowers: document.getElementById("metric-followers"),
-  metricFollowing: document.getElementById("metric-following"),
-  metricGists: document.getElementById("metric-gists"),
-  canvas: document.getElementById("game-canvas"),
-};
-
-const utils = {
-  clamp: (value, min, max) => Math.min(max, Math.max(min, value)),
-  rand: (min, max) => Math.random() * (max - min) + min,
-  rectHit: (a, b) =>
-    a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y,
-  circleRectHit(circle, rect) {
-    const nearestX = this.clamp(circle.x, rect.x, rect.x + rect.w);
-    const nearestY = this.clamp(circle.y, rect.y, rect.y + rect.h);
-    const dx = circle.x - nearestX;
-    const dy = circle.y - nearestY;
-    return dx * dx + dy * dy < circle.r * circle.r;
-  },
-  formatDate(value) {
-    return new Date(value).toLocaleDateString("it-IT", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
+  function node(tag, className, text) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (text !== undefined) element.textContent = text;
+    return element;
+  }
+  function externalLink(key, label) {
+    const link = node("a", "external-link", label);
+    link.href = apps[key].url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    return link;
+  }
+  function activeWindow() {
+    return [...windows].reverse().find((window) => !window.minimized);
+  }
+  function announce(text) {
+    status.textContent = text;
+  }
+  function closeMenu() {
+    menu.hidden = true;
+    start.setAttribute("aria-expanded", "false");
+  }
+  function fillBody(body, key) {
+    if (key === "readme") {
+      body.append(node("span", "small-label", "HELLO, WORLD."));
+      const heading = node("h2", null, "Enrico");
+      heading.append(
+        document.createElement("br"),
+        document.createTextNode("Corticelli"),
+      );
+      body.append(
+        heading,
+        node("p", null, "Backend Developer"),
+        externalLink("li", "Parliamone su LinkedIn ↗"),
+      );
+    } else if (key === "gh") {
+      body.append(
+        node("span", "small-label", "GITHUB / ENRICORTICELLI"),
+        node("h2", null, "Enrico.json"),
+      );
+      body.append(
+        node(
+          "pre",
+          "code-file",
+          JSON.stringify(
+            { name: "Enrico Corticelli", role: "Backend Developer" },
+            null,
+            2,
+          ),
+        ),
+      );
+      body.append(externalLink("gh", "Apri il mio GitHub ↗"));
+    } else if (key === "li") {
+      body.append(
+        node("div", "profile-banner", "in"),
+        node("span", "small-label", "LINKEDIN"),
+      );
+      const heading = node("h2", "profile-name", "Enrico");
+      heading.append(
+        document.createElement("br"),
+        document.createTextNode("Corticelli"),
+      );
+      body.append(
+        heading,
+        node("p", null, "Backend Developer"),
+        externalLink("li", "Visita il profilo e scrivimi ↗"),
+      );
+    } else if (key === "ig") {
+      body.append(
+        node("span", "small-label", "INSTAGRAM / ENRICORTICELLI"),
+        node("h2", null, "Fuori ufficio."),
+        node("div", "instagram-art", "ec."),
+        externalLink("ig", "Apri il mio Instagram ↗"),
+      );
+    }
+  }
+  function updateWindows() {
+    const active = activeWindow();
+    windows.forEach((window, index) => {
+      const entry = elements.get(window.id);
+      entry.window.style.zIndex = String(index + 5);
+      entry.window.hidden = window.minimized;
+      entry.window.classList.toggle("is-active", active?.id === window.id);
+      entry.task.classList.toggle("is-active", active?.id === window.id);
+      entry.task.setAttribute("aria-pressed", String(active?.id === window.id));
+      entry.window.style.left = `${window.x}px`;
+      entry.window.style.top = `${window.y}px`;
     });
-  },
-};
-
-function bootstrapProfile() {
-  if (ui.profileImage) {
-    ui.profileImage.src = PROFILE_IMAGE_PATH;
   }
-  if (ui.fullName) {
-    ui.fullName.textContent = FULL_NAME;
+  function clampWindow(window) {
+    const entry = elements.get(window.id);
+    if (layer.clientWidth === 0) return;
+    const width = Math.min(
+      330,
+      Math.max(180, layer.clientWidth - (layer.clientWidth < 500 ? 71 : 122)),
+    );
+    entry.window.style.width = `${width}px`;
+    // Minimized windows keep their measured height to stay inside the desktop.
+    const height = entry.window.offsetHeight || entry.height;
+    if (entry.window.offsetHeight) entry.height = entry.window.offsetHeight;
+    window.x = Math.max(0, Math.min(layer.clientWidth - width, window.x));
+    window.y = Math.max(
+      0,
+      Math.min(Math.max(0, layer.clientHeight - height), window.y),
+    );
   }
-  if (ui.role) {
-    ui.role.textContent = ROLE;
+  function focusWindow(window) {
+    window.minimized = false;
+    windows = windows.filter((entry) => entry !== window);
+    windows.push(window);
+    clampWindow(window);
+    updateWindows();
   }
-  if (ui.shortDescription) {
-    ui.shortDescription.textContent = SHORT_DESCRIPTION;
+  function focusAfterHide(fallback) {
+    const active = activeWindow();
+    if (active)
+      elements.get(active.id).window.querySelector(".window-handle").focus();
+    else fallback.focus();
   }
-  if (ui.githubLink) {
-    ui.githubLink.href = `https://github.com/${GITHUB_USERNAME}`;
-  }
-  if (ui.linkedinLink) {
-    ui.linkedinLink.href = LINKEDIN_URL;
-  }
-  if (ui.instagramLink) {
-    ui.instagramLink.href = INSTAGRAM_URL;
-  }
-}
-
-function renderHeroMetrics(profile) {
-  if (!profile) return;
-  if (ui.metricRepos) {
-    ui.metricRepos.textContent = String(profile.public_repos ?? 0);
-  }
-  if (ui.metricFollowers) {
-    ui.metricFollowers.textContent = String(profile.followers ?? 0);
-  }
-  if (ui.metricFollowing) {
-    ui.metricFollowing.textContent = String(profile.following ?? 0);
-  }
-  if (ui.metricGists) {
-    ui.metricGists.textContent = String(profile.public_gists ?? 0);
-  }
-}
-
-function resetHeroMetrics() {
-  if (ui.metricRepos) {
-    ui.metricRepos.textContent = "--";
-  }
-  if (ui.metricFollowers) {
-    ui.metricFollowers.textContent = "--";
-  }
-  if (ui.metricFollowing) {
-    ui.metricFollowing.textContent = "--";
-  }
-  if (ui.metricGists) {
-    ui.metricGists.textContent = "--";
-  }
-}
-
-async function loadGitHubRecap() {
-  if (!GITHUB_USERNAME || GITHUB_USERNAME.includes("INSERISCI")) {
-    if (ui.githubStatus) {
-      ui.githubStatus.textContent =
-        "Inserisci il tuo username GitHub in app.js per mostrare il recap automatico.";
+  function mountWindow(window) {
+    const win = template.content.firstElementChild.cloneNode(true);
+    const app = apps[window.app];
+    const task = node("button", null, app.label);
+    task.type = "button";
+    task.setAttribute(
+      "aria-label",
+      `Mostra o riduci ${app.title}, finestra ${window.id}`,
+    );
+    task.title = `${app.title} · finestra ${window.id}`;
+    win.dataset.windowId = String(window.id);
+    win.setAttribute("aria-label", `${app.label} — finestra ${window.id}`);
+    win.querySelector(".window-title").textContent = app.title;
+    win.querySelector(".window-title").title = app.title;
+    win.querySelector(".window-statusbar > span").textContent = app.status;
+    const handle = win.querySelector(".window-handle");
+    handle.setAttribute(
+      "aria-label",
+      `Sposta ${app.title}; usa le frecce della tastiera`,
+    );
+    const close = win.querySelector(".window-close");
+    const minimize = win.querySelector(".window-minimize");
+    close.setAttribute(
+      "aria-label",
+      `Chiudi ${app.title}, finestra ${window.id}`,
+    );
+    minimize.setAttribute(
+      "aria-label",
+      `Riduci ${app.title}, finestra ${window.id}`,
+    );
+    if (app.url) {
+      win.querySelector(".addressbar").hidden = false;
+      win.querySelector(".window-address").textContent = app.address;
+      win.querySelector(".window-address").title = app.address;
     }
-    resetHeroMetrics();
-    return;
-  }
-
-  const base = "https://api.github.com";
-
-  try {
-    const [profileRes, reposRes, eventsRes] = await Promise.all([
-      fetch(`${base}/users/${GITHUB_USERNAME}`),
-      fetch(`${base}/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=${REPOS_TO_SHOW}`),
-      fetch(`${base}/users/${GITHUB_USERNAME}/events/public?per_page=8`),
-    ]);
-
-    if (!profileRes.ok || !reposRes.ok || !eventsRes.ok) {
-      throw new Error("GitHub API error");
-    }
-
-    const [profile, repos, events] = await Promise.all([
-      profileRes.json(),
-      reposRes.json(),
-      eventsRes.json(),
-    ]);
-
-    renderHeroMetrics(profile);
-    renderGitHubStats(profile, repos);
-    renderRepos(repos);
-    renderEvents(events);
-    if (ui.githubStatus) {
-      ui.githubStatus.textContent = "Dati GitHub aggiornati.";
-    }
-  } catch (error) {
-    console.error(error);
-    if (ui.githubStatus) {
-      ui.githubStatus.textContent =
-        "GitHub recap non disponibile al momento. Il resto del sito funziona normalmente.";
-    }
-    resetHeroMetrics();
-    if (ui.githubStats) {
-      ui.githubStats.hidden = true;
-    }
-    if (ui.reposList) {
-      ui.reposList.innerHTML = "";
-    }
-    if (ui.activityList) {
-      ui.activityList.innerHTML = "";
-    }
-  }
-}
-
-function renderGitHubStats(profile, repos) {
-  if (!ui.githubStats) return;
-
-  const stars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
-  const forks = repos.reduce((sum, repo) => sum + (repo.forks_count || 0), 0);
-  const languageCounts = repos.reduce((acc, repo) => {
-    const language = repo.language || "n/d";
-    acc[language] = (acc[language] || 0) + 1;
-    return acc;
-  }, {});
-
-  const topLanguages = Object.entries(languageCounts)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 4)
-    .map(([language]) => language)
-    .join(", ");
-
-  const stats = [
-    { label: "Repo pubblici", value: profile.public_repos ?? 0 },
-    { label: `Stelle (${repos.length} repo)`, value: stars },
-    { label: `Fork (${repos.length} repo)`, value: forks },
-    { label: "Linguaggi principali", value: topLanguages || "n/d" },
-  ];
-
-  ui.githubStats.innerHTML = stats
-    .map(
-      (item) =>
-        `<article class="stat"><div class="stat-label">${item.label}</div><div class="stat-value">${item.value}</div></article>`,
-    )
-    .join("");
-  ui.githubStats.hidden = false;
-}
-
-function renderRepos(repos) {
-  if (!ui.reposList) return;
-
-  if (!repos.length) {
-    ui.reposList.innerHTML = '<p class="muted">Nessun repository pubblico trovato.</p>';
-    return;
-  }
-
-  ui.reposList.innerHTML = repos
-    .map(
-      (repo) => `
-      <article class="repo">
-        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a>
-        <p class="muted">${repo.description || "Nessuna descrizione disponibile."}</p>
-        <div class="repo-meta">
-          <span>Lingua: ${repo.language || "n/d"}</span>
-          <span>★ ${repo.stargazers_count || 0}</span>
-          <span>⑂ ${repo.forks_count || 0}</span>
-        </div>
-      </article>
-    `,
-    )
-    .join("");
-}
-
-function renderEvents(events) {
-  if (!ui.activityList) return;
-
-  if (!events.length) {
-    ui.activityList.innerHTML = "<li>Nessuna attività pubblica recente.</li>";
-    return;
-  }
-
-  ui.activityList.innerHTML = events
-    .slice(0, 7)
-    .map((event) => {
-      const repoName = event.repo?.name || "repo";
-      return `<li><strong>${event.type}</strong> su <em>${repoName}</em> · ${utils.formatDate(event.created_at)}</li>`;
-    })
-    .join("");
-}
-
-function createInputManager(canvas) {
-  const keys = new Set();
-  const virtualKeys = new Set();
-  const pointer = { active: false, x: 0, y: 0, tap: false };
-
-  const mapAlias = {
-    KeyW: "ArrowUp",
-    KeyA: "ArrowLeft",
-    KeyS: "ArrowDown",
-    KeyD: "ArrowRight",
-    Space: "Space",
-  };
-
-  const onKeyDown = (event) => {
-    const key = mapAlias[event.code] || event.code;
-    keys.add(key);
-    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"].includes(key)) {
+    fillBody(win.querySelector(".window-body"), window.app);
+    layer.append(win);
+    tasks.append(task);
+    elements.set(window.id, { window: win, task, height: 290 });
+    win.addEventListener("pointerdown", () => focusWindow(window));
+    win.addEventListener("focusin", () => focusWindow(window));
+    close.addEventListener("click", (event) => {
+      event.stopPropagation();
+      windows = windows.filter((entry) => entry !== window);
+      win.remove();
+      task.remove();
+      elements.delete(window.id);
+      updateWindows();
+      focusAfterHide(root.querySelector(`[data-open="${window.app}"]`));
+      announce(`${app.label} chiuso.`);
+    });
+    minimize.addEventListener("click", (event) => {
+      event.stopPropagation();
+      window.minimized = true;
+      updateWindows();
+      focusAfterHide(task);
+      announce(`${app.label} ridotto nella barra delle applicazioni.`);
+    });
+    task.addEventListener("click", () => {
+      if (activeWindow()?.id === window.id && !window.minimized) {
+        window.minimized = true;
+        updateWindows();
+      } else focusWindow(window);
+    });
+    let drag;
+    handle.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) return;
+      focusWindow(window);
+      drag = {
+        x: event.clientX,
+        y: event.clientY,
+        left: window.x,
+        top: window.y,
+      };
+      handle.setPointerCapture(event.pointerId);
       event.preventDefault();
-    }
-  };
-
-  const onKeyUp = (event) => {
-    const key = mapAlias[event.code] || event.code;
-    keys.delete(key);
-  };
-
-  const setPointerFromEvent = (clientX, clientY, tap = false) => {
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    pointer.active = true;
-    pointer.x = (clientX - rect.left) * scaleX;
-    pointer.y = (clientY - rect.top) * scaleY;
-    if (tap) {
-      pointer.tap = true;
-    }
-  };
-
-  const onMouseMove = (event) => setPointerFromEvent(event.clientX, event.clientY);
-  const onMouseDown = (event) => setPointerFromEvent(event.clientX, event.clientY, true);
-  const onMouseLeave = () => {
-    pointer.active = false;
-  };
-
-  const onTouchStart = (event) => {
-    const touch = event.changedTouches[0];
-    if (!touch) return;
-    setPointerFromEvent(touch.clientX, touch.clientY, true);
-    event.preventDefault();
-  };
-
-  const onTouchMove = (event) => {
-    const touch = event.changedTouches[0];
-    if (!touch) return;
-    setPointerFromEvent(touch.clientX, touch.clientY);
-    event.preventDefault();
-  };
-
-  const onTouchEnd = () => {
-    pointer.active = false;
-  };
-
-  window.addEventListener("keydown", onKeyDown, { passive: false });
-  window.addEventListener("keyup", onKeyUp);
-
-  canvas.addEventListener("mousemove", onMouseMove);
-  canvas.addEventListener("mousedown", onMouseDown);
-  canvas.addEventListener("mouseleave", onMouseLeave);
-  canvas.addEventListener("touchstart", onTouchStart, { passive: false });
-  canvas.addEventListener("touchmove", onTouchMove, { passive: false });
-  canvas.addEventListener("touchend", onTouchEnd);
-
-  const touchButtons = [];
-  const activeButtonKeys = new Map();
-
-  return {
-    isDown(key) {
-      return keys.has(key) || virtualKeys.has(key);
-    },
-    axisX() {
-      return Number(this.isDown("ArrowRight")) - Number(this.isDown("ArrowLeft"));
-    },
-    axisY() {
-      return Number(this.isDown("ArrowDown")) - Number(this.isDown("ArrowUp"));
-    },
-    consumeTap() {
-      const tapped = pointer.tap;
-      pointer.tap = false;
-      return tapped;
-    },
-    pointer,
-    destroy() {
-      window.removeEventListener("keydown", onKeyDown);
-      window.removeEventListener("keyup", onKeyUp);
-      canvas.removeEventListener("mousemove", onMouseMove);
-      canvas.removeEventListener("mousedown", onMouseDown);
-      canvas.removeEventListener("mouseleave", onMouseLeave);
-      canvas.removeEventListener("touchstart", onTouchStart);
-      canvas.removeEventListener("touchmove", onTouchMove);
-      canvas.removeEventListener("touchend", onTouchEnd);
-      touchButtons.forEach((button) => {
-        const handlers = activeButtonKeys.get(button);
-        if (!handlers) return;
-        button.removeEventListener("touchstart", handlers.start);
-        button.removeEventListener("touchend", handlers.end);
-        button.removeEventListener("mousedown", handlers.start);
-        button.removeEventListener("mouseup", handlers.end);
-        button.removeEventListener("mouseleave", handlers.end);
-      });
-    },
-  };
-}
-
-function createGameRunner(canvas) {
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return null;
-
-  const input = createInputManager(canvas);
-  let gameRafId = 0;
-  let countdownRafId = 0;
-  let nextGameTimeoutId = 0;
-  let lastTime = 0;
-
-  function drawOverlay(text = "Game Over") {
-    ctx.fillStyle = "rgba(3, 7, 17, 0.62)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#e8edf9";
-    ctx.font = "700 22px sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+    });
+    handle.addEventListener("pointermove", (event) => {
+      if (!drag) return;
+      window.x = drag.left + event.clientX - drag.x;
+      window.y = drag.top + event.clientY - drag.y;
+      clampWindow(window);
+      updateWindows();
+    });
+    handle.addEventListener("pointerup", () => {
+      drag = null;
+    });
+    handle.addEventListener("pointercancel", () => {
+      drag = null;
+    });
+    handle.addEventListener("keydown", (event) => {
+      const move = {
+        ArrowLeft: [-12, 0],
+        ArrowRight: [12, 0],
+        ArrowUp: [0, -12],
+        ArrowDown: [0, 12],
+      }[event.key];
+      if (!move) return;
+      event.preventDefault();
+      window.x += move[0];
+      window.y += move[1];
+      clampWindow(window);
+      updateWindows();
+    });
+    clampWindow(window);
   }
-
-  function drawScoreHud(scoreValue) {
-    const value = Math.max(0, Math.floor(scoreValue || 0));
-    const label = `Punti: ${value}`;
-
-    ctx.save();
-    ctx.font = "700 16px Sora, sans-serif";
-    const textWidth = ctx.measureText(label).width;
-    const boxWidth = textWidth + 22;
-    const boxHeight = 30;
-    const x = canvas.width - boxWidth - 10;
-    const y = 10;
-
-    ctx.fillStyle = "rgba(8, 20, 48, 0.7)";
-    ctx.strokeStyle = "rgba(130, 190, 255, 0.45)";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.roundRect(x, y, boxWidth, boxHeight, 8);
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.fillStyle = "#e8edf9";
-    ctx.textAlign = "left";
-    ctx.textBaseline = "middle";
-    ctx.fillText(label, x + 11, y + boxHeight / 2);
-    ctx.restore();
-  }
-
-  function drawCountdown(seconds, elapsedMs) {
-    ctx.fillStyle = "#050910";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "rgba(3, 7, 17, 0.56)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    const wave = (Math.sin(elapsedMs / 210) + 1) / 2;
-    const scale = 0.9 + wave * 0.18;
-    const alpha = 0.55 + wave * 0.45;
-
-    ctx.save();
-    ctx.translate(canvas.width / 2, canvas.height / 2);
-    ctx.scale(scale, scale);
-    ctx.fillStyle = `rgba(232, 237, 249, ${alpha})`;
-    ctx.font = "700 88px Sora, sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(String(seconds), 0, 0);
-    ctx.restore();
-  }
-
-  function stop() {
-    if (gameRafId) {
-      cancelAnimationFrame(gameRafId);
-      gameRafId = 0;
-    }
-    if (countdownRafId) {
-      cancelAnimationFrame(countdownRafId);
-      countdownRafId = 0;
-    }
-    if (nextGameTimeoutId) {
-      window.clearTimeout(nextGameTimeoutId);
-      nextGameTimeoutId = 0;
-    }
-  }
-
-  function start(gameFactory, onGameOver) {
-    stop();
-
-    const startCountdownAt = performance.now();
-    const countdownSeconds = 3;
-
-    const runGame = () => {
-      const control = {
-        score: 0,
-        gameOver: false,
-        message: "",
-        setScore(value) {
-          this.score = value;
-        },
-        end(message) {
-          this.gameOver = true;
-          this.message = message;
-        },
-      };
-
-      const currentGame = gameFactory({ ctx, canvas, input, control, utils });
-      let gameOverHandled = false;
-      lastTime = performance.now();
-
-      const frame = (time) => {
-        const dt = Math.min((time - lastTime) / 1000, 0.033);
-        lastTime = time;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        currentGame.update(dt);
-        currentGame.draw();
-        drawScoreHud(control.score);
-
-        if (control.gameOver) {
-          drawOverlay(control.message || "Game Over");
-          if (!gameOverHandled) {
-            gameOverHandled = true;
-            nextGameTimeoutId = window.setTimeout(() => {
-              nextGameTimeoutId = 0;
-              if (typeof onGameOver === "function") {
-                onGameOver();
-              }
-            }, 800);
-          }
-          return;
-        }
-
-        gameRafId = requestAnimationFrame(frame);
-      };
-
-      gameRafId = requestAnimationFrame(frame);
+  function openWindow(key) {
+    const index = windows.length % 7;
+    const narrow = layer.clientWidth < 500;
+    const window = {
+      id: nextId++,
+      app: key,
+      x: narrow ? 65 + index * 8 : 120 + index * 33,
+      y: 32 + index * 34,
+      minimized: false,
     };
-
-    const countdownFrame = (now) => {
-      const elapsed = (now - startCountdownAt) / 1000;
-      const remaining = countdownSeconds - elapsed;
-
-      if (remaining <= 0) {
-        countdownRafId = 0;
-        runGame();
-        return;
-      }
-
-      const shownSecond = Math.ceil(remaining);
-      drawCountdown(shownSecond, now - startCountdownAt);
-
-      countdownRafId = requestAnimationFrame(countdownFrame);
-    };
-
-    countdownRafId = requestAnimationFrame(countdownFrame);
+    windows.push(window);
+    mountWindow(window);
+    updateWindows();
+    closeMenu();
+    announce(`${apps[key].label} aperto in una nuova finestra.`);
   }
-
-  return {
-    start,
-    destroy() {
-      stop();
-      input.destroy();
-    },
-  };
-}
-
-function createAsteroidDodge({ ctx, canvas, input, control, utils }) {
-  const ship = { x: canvas.width / 2 - 12, y: canvas.height - 48, w: 24, h: 24, speed: 220 };
-  const asteroids = [];
-  let spawnTimer = 0;
-  let elapsed = 0;
-
-  return {
-    update(dt) {
-      elapsed += dt;
-      control.setScore(elapsed);
-
-      const speedBoost = 1 + elapsed * 0.04;
-      ship.x += input.axisX() * ship.speed * dt;
-      ship.y += input.axisY() * ship.speed * dt;
-
-      if (input.pointer.active) {
-        ship.x += (input.pointer.x - ship.w / 2 - ship.x) * 0.14;
-        ship.y += (input.pointer.y - ship.h / 2 - ship.y) * 0.14;
-      }
-
-      ship.x = utils.clamp(ship.x, 0, canvas.width - ship.w);
-      ship.y = utils.clamp(ship.y, 0, canvas.height - ship.h);
-
-      spawnTimer -= dt;
-      if (spawnTimer <= 0) {
-        spawnTimer = Math.max(0.18, 0.75 - elapsed * 0.012);
-        asteroids.push({
-          x: utils.rand(12, canvas.width - 12),
-          y: -18,
-          r: utils.rand(8, 15),
-          vy: utils.rand(80, 145) * speedBoost,
-        });
-      }
-
-      for (let i = asteroids.length - 1; i >= 0; i -= 1) {
-        const asteroid = asteroids[i];
-        asteroid.y += asteroid.vy * dt;
-        if (utils.circleRectHit(asteroid, ship)) {
-          control.end("Colpito da un asteroide");
-          break;
-        }
-        if (asteroid.y - asteroid.r > canvas.height + 8) {
-          asteroids.splice(i, 1);
-        }
-      }
-    },
-    draw() {
-      ctx.fillStyle = "#050910";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = "#4ed7ff";
-      ctx.beginPath();
-      ctx.moveTo(ship.x + ship.w / 2, ship.y);
-      ctx.lineTo(ship.x, ship.y + ship.h);
-      ctx.lineTo(ship.x + ship.w, ship.y + ship.h);
-      ctx.closePath();
-      ctx.fill();
-
-      ctx.fillStyle = "#ffc96b";
-      asteroids.forEach((asteroid) => {
-        ctx.beginPath();
-        ctx.arc(asteroid.x, asteroid.y, asteroid.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-    },
-  };
-}
-
-function createNeonSnake({ ctx, canvas, input, control, utils }) {
-  const cell = 16;
-  const cols = Math.floor(canvas.width / cell);
-  const rows = Math.floor(canvas.height / cell);
-  const snake = [{ x: 8, y: 8 }];
-  let direction = { x: 1, y: 0 };
-  let nextDirection = { x: 1, y: 0 };
-  let food = { x: 12, y: 8 };
-  let tickTimer = 0;
-  let tick = 0.14;
-
-  for (let i = 1; i < 4; i += 1) {
-    snake.push({ x: snake[0].x - i, y: snake[0].y });
+  function setBootProgress(value) {
+    bootMeter.setAttribute("aria-valuenow", String(value));
+    bootMeter.querySelector("span").style.width = `${value}%`;
   }
-
-  const placeFood = () => {
-    let valid = false;
-    while (!valid) {
-      const candidate = { x: Math.floor(utils.rand(0, cols)), y: Math.floor(utils.rand(0, rows)) };
-      valid = !snake.some((part) => part.x === candidate.x && part.y === candidate.y);
-      if (valid) {
-        food = candidate;
-      }
+  function beginBoot() {
+    clearInterval(bootInterval);
+    clearTimeout(bootTimeout);
+    closeMenu();
+    status.textContent = "";
+    bsod.hidden = true;
+    startup.hidden = false;
+    os.classList.add("booting");
+    workspace.inert = true;
+    taskbar.inert = true;
+    const started = performance.now();
+    setBootProgress(0);
+    bootStep.textContent = "Avvio del sistema…";
+    bootInterval = setInterval(() => {
+      const elapsed = performance.now() - started;
+      setBootProgress(
+        Math.min(99, Math.floor((elapsed / BOOT_DURATION_MS) * 100)),
+      );
+      bootStep.textContent =
+        elapsed < 1000
+          ? "Avvio del sistema…"
+          : elapsed < 2000
+            ? "Caricamento delle applicazioni…"
+            : "Preparazione del desktop…";
+    }, 250);
+    bootTimeout = setTimeout(() => {
+      clearInterval(bootInterval);
+      startup.hidden = true;
+      os.classList.remove("booting");
+      workspace.inert = false;
+      taskbar.inert = false;
+      setBootProgress(100);
+      announce("Desktop pronto. Enrico Corticelli, Backend Developer.");
+    }, BOOT_DURATION_MS);
+  }
+  root.querySelectorAll("[data-open]").forEach((button) => {
+    button.addEventListener("click", () => openWindow(button.dataset.open));
+  });
+  start.addEventListener("click", () => {
+    menu.hidden = !menu.hidden;
+    start.setAttribute("aria-expanded", String(!menu.hidden));
+  });
+  workspace.addEventListener("pointerdown", (event) => {
+    if (!event.target.closest(".os-window")) closeMenu();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !menu.hidden) {
+      closeMenu();
+      start.focus();
     }
-  };
-
-  return {
-    update(dt) {
-      if (input.isDown("ArrowUp") && direction.y !== 1) nextDirection = { x: 0, y: -1 };
-      if (input.isDown("ArrowDown") && direction.y !== -1) nextDirection = { x: 0, y: 1 };
-      if (input.isDown("ArrowLeft") && direction.x !== 1) nextDirection = { x: -1, y: 0 };
-      if (input.isDown("ArrowRight") && direction.x !== -1) nextDirection = { x: 1, y: 0 };
-
-      tickTimer += dt;
-      if (tickTimer < tick) return;
-      tickTimer = 0;
-
-      direction = nextDirection;
-      const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
-
-      if (head.x < 0 || head.y < 0 || head.x >= cols || head.y >= rows) {
-        control.end("Hai colpito il bordo");
-        return;
-      }
-
-      if (snake.some((part) => part.x === head.x && part.y === head.y)) {
-        control.end("Hai colpito te stesso");
-        return;
-      }
-
-      snake.unshift(head);
-
-      if (head.x === food.x && head.y === food.y) {
-        control.setScore(control.score + 1);
-        tick = Math.max(0.07, tick * 0.98);
-        placeFood();
-      } else {
-        snake.pop();
-      }
-    },
-    draw() {
-      ctx.fillStyle = "#05080f";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.strokeStyle = "rgba(78, 215, 255, 0.08)";
-      for (let x = 0; x < cols; x += 1) {
-        for (let y = 0; y < rows; y += 1) {
-          ctx.strokeRect(x * cell, y * cell, cell, cell);
-        }
-      }
-
-      snake.forEach((part, index) => {
-        ctx.fillStyle = index === 0 ? "#86f8ff" : "#29c4ff";
-        ctx.fillRect(part.x * cell + 2, part.y * cell + 2, cell - 4, cell - 4);
-      });
-
-      ctx.fillStyle = "#ff5f87";
-      ctx.fillRect(food.x * cell + 3, food.y * cell + 3, cell - 6, cell - 6);
-    },
-  };
-}
-
-function createTinyRunner({ ctx, canvas, input, control, utils }) {
-  const groundY = canvas.height - 44;
-  const player = { x: 56, y: groundY - 22, w: 22, h: 22, vy: 0, grounded: true };
-  const obstacles = [];
-  let spawnTimer = 0;
-  let elapsed = 0;
-  const gravity = 900;
-
-  const jump = () => {
-    if (!player.grounded) return;
-    player.vy = -340;
-    player.grounded = false;
-  };
-
-  return {
-    update(dt) {
-      elapsed += dt;
-      control.setScore(elapsed * 10);
-
-      if (input.isDown("Space") || input.isDown("ArrowUp") || input.consumeTap()) {
-        jump();
-      }
-
-      player.vy += gravity * dt;
-      player.y += player.vy * dt;
-      if (player.y + player.h >= groundY) {
-        player.y = groundY - player.h;
-        player.vy = 0;
-        player.grounded = true;
-      }
-
-      const speed = 140 + elapsed * 15;
-      spawnTimer -= dt;
-      if (spawnTimer <= 0) {
-        spawnTimer = Math.max(0.5, 1.15 - elapsed * 0.05);
-        const h = utils.rand(20, 40);
-        obstacles.push({ x: canvas.width + 10, y: groundY - h, w: utils.rand(14, 24), h });
-      }
-
-      for (let i = obstacles.length - 1; i >= 0; i -= 1) {
-        const obstacle = obstacles[i];
-        obstacle.x -= speed * dt;
-        if (utils.rectHit(player, obstacle)) {
-          control.end("Impatto con ostacolo");
-          break;
-        }
-        if (obstacle.x + obstacle.w < -4) {
-          obstacles.splice(i, 1);
-        }
-      }
-    },
-    draw() {
-      ctx.fillStyle = "#070d16";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.strokeStyle = "rgba(78,215,255,0.24)";
-      ctx.beginPath();
-      ctx.moveTo(0, groundY);
-      ctx.lineTo(canvas.width, groundY);
-      ctx.stroke();
-
-      ctx.fillStyle = "#4ed7ff";
-      ctx.fillRect(player.x, player.y, player.w, player.h);
-
-      ctx.fillStyle = "#ff8f40";
-      obstacles.forEach((obstacle) => {
-        ctx.fillRect(obstacle.x, obstacle.y, obstacle.w, obstacle.h);
-      });
-    },
-  };
-}
-
-function createBugBlaster({ ctx, canvas, input, control, utils }) {
-  const player = { x: canvas.width / 2 - 16, y: canvas.height - 28, w: 32, h: 16, speed: 260 };
-  const bullets = [];
-  const bugs = [];
-  let shootCd = 0;
-  let spawnTimer = 0;
-  let elapsed = 0;
-
-  return {
-    update(dt) {
-      elapsed += dt;
-      player.x += input.axisX() * player.speed * dt;
-      if (input.pointer.active) {
-        player.x += (input.pointer.x - player.w / 2 - player.x) * 0.2;
-      }
-      player.x = utils.clamp(player.x, 0, canvas.width - player.w);
-
-      shootCd -= dt;
-      if ((input.isDown("Space") || input.consumeTap()) && shootCd <= 0) {
-        shootCd = 0.18;
-        bullets.push({ x: player.x + player.w / 2 - 2, y: player.y - 6, w: 4, h: 9, vy: 310 });
-      }
-
-      spawnTimer -= dt;
-      if (spawnTimer <= 0) {
-        spawnTimer = Math.max(0.22, 0.7 - elapsed * 0.03);
-        bugs.push({
-          x: utils.rand(8, canvas.width - 24),
-          y: -16,
-          w: 18,
-          h: 14,
-          vy: utils.rand(55, 105) + elapsed * 4,
-        });
-      }
-
-      for (let i = bullets.length - 1; i >= 0; i -= 1) {
-        bullets[i].y -= bullets[i].vy * dt;
-        if (bullets[i].y + bullets[i].h < 0) bullets.splice(i, 1);
-      }
-
-      for (let i = bugs.length - 1; i >= 0; i -= 1) {
-        const bug = bugs[i];
-        bug.y += bug.vy * dt;
-
-        if (bug.y + bug.h >= canvas.height) {
-          control.end("Un bug ha superato la difesa");
-          break;
-        }
-
-        if (utils.rectHit(player, bug)) {
-          control.end("Sei stato colpito da un bug");
-          break;
-        }
-
-        for (let j = bullets.length - 1; j >= 0; j -= 1) {
-          if (utils.rectHit(bullets[j], bug)) {
-            bullets.splice(j, 1);
-            bugs.splice(i, 1);
-            control.setScore(control.score + 10);
-            break;
-          }
-        }
-      }
-    },
-    draw() {
-      ctx.fillStyle = "#060b13";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = "#4ed7ff";
-      ctx.fillRect(player.x, player.y, player.w, player.h);
-      ctx.fillRect(player.x + player.w / 2 - 5, player.y - 6, 10, 6);
-
-      ctx.fillStyle = "#b28bff";
-      bullets.forEach((bullet) => ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h));
-
-      ctx.fillStyle = "#ff5f87";
-      bugs.forEach((bug) => {
-        ctx.fillRect(bug.x, bug.y, bug.w, bug.h);
-        ctx.fillStyle = "#ffd1dd";
-        ctx.fillRect(bug.x + 3, bug.y + 4, 2, 2);
-        ctx.fillRect(bug.x + bug.w - 5, bug.y + 4, 2, 2);
-        ctx.fillStyle = "#ff5f87";
-      });
-    },
-  };
-}
-
-function initPlayground() {
-  if (!ui.canvas) {
-    return;
-  }
-
-  const gameFactories = [createAsteroidDodge, createNeonSnake, createTinyRunner, createBugBlaster];
-  let lastFactory = null;
-
-  const pickNextFactory = () => {
-    const pool = gameFactories.filter((factory) => factory !== lastFactory);
-    const nextFactory = pool[Math.floor(Math.random() * pool.length)] || gameFactories[0];
-    lastFactory = nextFactory;
-    return nextFactory;
-  };
-
-  const runner = createGameRunner(ui.canvas);
-  if (!runner) {
-    return;
-  }
-
-  const startNext = () => {
-    runner.start(pickNextFactory(), startNext);
-  };
-
-  startNext();
-}
-
-bootstrapProfile();
-loadGitHubRecap();
-initPlayground();
+  });
+  root
+    .querySelector('[data-menu="readme"]')
+    .addEventListener("click", () => openWindow("readme"));
+  root
+    .querySelector('[data-menu="restart"]')
+    .addEventListener("click", beginBoot);
+  root.querySelector('[data-menu="crash"]').addEventListener("click", () => {
+    closeMenu();
+    bsod.hidden = false;
+    workspace.inert = true;
+    taskbar.inert = true;
+    root.querySelector(".reboot").focus();
+  });
+  root.querySelector(".reboot").addEventListener("click", beginBoot);
+  const observer = new ResizeObserver(() => {
+    cancelAnimationFrame(resizeFrame);
+    resizeFrame = requestAnimationFrame(() => {
+      windows.forEach(clampWindow);
+      updateWindows();
+    });
+  });
+  observer.observe(layer);
+  openWindow("readme");
+  beginBoot();
+})();
